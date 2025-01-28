@@ -1,8 +1,10 @@
-# Use an official Nginx image as the base
-FROM nginx:alpine
+FROM node:16
 
-# Copy the calculator app into the Nginx web directory
-COPY index.html /usr/share/nginx/html/index.html
+WORKDIR /app
 
-# Expose port 80
-EXPOSE 80
+COPY . /app
+
+RUN npm install -g http-server
+
+# Default command to serve the app on port 3000
+CMD ["http-server", "/app", "-p", "3000"]
